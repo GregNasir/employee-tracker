@@ -11,7 +11,7 @@ const db = mysql.createConnection(
         user: 'root',
         // MySQL password
         password: '',
-        database: 'employee_db'
+        database: 'employees_db'
     },
     console.log(`Connected to the employee_db database.`)
 );
@@ -39,7 +39,7 @@ const init = () => {
             switch (ans.initialize) {
                 case "View all departments": viewDept();
                     break;
-                case "View all roles": viewRoles();
+                case "View all roles": viewRole();
                     break;
                 case "View all employees": viewEmployees();
                     break;
@@ -68,15 +68,17 @@ const viewDept = () => {
     })
 };
 
-const viewRoles = () => {
-    db.query(`SELECT * FROM roles`, (err, results) => {
+const viewRole = () => {
+    db.query(`SELECT role.*, department.department_name AS department
+    FROM role
+    LEFT JOIN department ON role.department_id = department_id;`, (err, results) => {
         err ? console.error(err) : console.table(results);
         init();
     })
 };
 
 const viewEmployees = () => {
-    db.query(`SELECT * FROM employees`, (err, results) => {
+    db.query(`SELECT employees.id, employees.first_name, employees.last_name, role.title, department.department_name AS department, role.salary,  CONCAT(manager.first_name, " ", manager.last_name) AS manager FROM employees LEFT JOIN role ON employees.role_id = role.id LEFT JOIN  department on role.department_id = department.id LEFT JOIN employees manager ON manager.id = employees.manager_id`, (err, results) => {
         err ? console.error(err) : console.table(results);
         init();
     })
