@@ -69,9 +69,9 @@ const viewDept = () => {
 };
 
 const viewRole = () => {
-    db.query(`SELECT role.*, department.department_name AS department
+    db.query(`SELECT role.id, role.title, role.salary, CONCAT(department_name) AS department
     FROM role
-    LEFT JOIN department ON role.department_id = department_id;`, (err, results) => {
+    LEFT JOIN  department on role.department_id = department.id;`, (err, results) => {
         err ? console.error(err) : console.table(results);
         init();
     })
