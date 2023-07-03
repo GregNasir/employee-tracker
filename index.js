@@ -113,82 +113,105 @@ const addDept = () => {
 
 const addRole = () => {
     db.query('SELECT * FROM department', (err, department) => {
-      if (err) { console.log(err) }
-      inquirer.prompt([
-        {
-          type: 'input',
-          name: 'title',
-          message: 'Name of role you wish to add:'
-        },
-        {
-          type: 'number',
-          name: 'salary',
-          message: 'Salary for role:'
-        },
-        {
-          type: 'list',
-          name: 'departmentId',
-          message: 'Department ID:',
-          choices: department.map(department => ({
-            name: department.department_name,
-            value: department.id
-          }))
-        }
-      ]).then(function (answers) {
-        db.query('INSERT INTO role SET ?', {
-          title: answers.title,
-          salary: answers.salary,
-          department_id: answers.departmentId
-        }, function (err, res) {
-          if (err) throw err;
-          console.table(res)
-          init();
-        })
-      })
-    })
-  }
-
-const addEmployee = () => {
-    // const rollChoices = () => db.promise().query(`SELECT * FROM roles`)
-    // .then((rows) => {
-    //     let arrNames = rows[0].map(obj => obj.name);
-    //     return arrNames
-    // })
-    inquirer
-        .prompt([
+        if (err) { console.log(err) }
+        inquirer.prompt([
             {
-                type: "input",
-                message: "What is the employee's first name?",
-                name: "firstName"
+            type: 'input',
+            name: 'title',
+            message: 'Name of role you wish to add:'
             },
             {
-                type: "input",
-                message: "What is the employee's last name?",
-                name: "lastName"
+            type: 'number',
+            name: 'salary',
+            message: 'Salary for role:'
             },
-            // {
-            //     type: "list",
-            //     message: "What is the employee's role?",
-            //     name: "employeeRole",
-            //     choices: rollChoices
-            // }
-        ]).then(ans => {
-            db.query(`INSERT INTO employees(first_name, last_name)
-                    VALUES(?, ?)`, [ans.firstName, ans.lastName], (err, results) => {
-                if (err) {
-                    console.log(err)
-                } else {
-                    db.query(`SELECT * FROM employees`, (err, results) => {
-                        err ? console.error(err) : console.table(results);
-                        init();
-                    })
-                }
+            {
+            type: 'list',
+            name: 'departmentId',
+            message: 'Department ID:',
+            choices: department.map(department => ({
+                name: department.department_name,
+                value: department.id
+            }))
             }
-            )
+        ]).then(function (answers) {
+            db.query('INSERT INTO role SET ?', {
+            title: answers.title,
+            salary: answers.salary,
+            department_id: answers.departmentId
+            }, function (err, res) {
+            if (err) throw err;
+            console.table(res)
+            init();
+            })
         })
-}
+        })
+    }
 
-
+    const addEmployee = () => {
+        db.query('SELECT * FROM role', (err, role) => {
+            if (err) { 
+                console.log(err);
+                return;
+            }
+    
+            db.query('SELECT * FROM employees', (err, employees) => {
+                if (err) { 
+                    console.log(err);
+                    return;
+                }
+    
+                inquirer
+                    .prompt([
+                        {
+                            type: "input",
+                            message: "What is the employee's first name?",
+                            name: "firstName"
+                        },
+                        {
+                            type: "input",
+                            message: "What is the employee's last name?",
+                            name: "lastName"
+                        },
+                        {
+                            type: "list",
+                            name: "roleId",
+                            message: "What role will this employee be assigned?",
+                            choices: role.map(role => ({
+                                name: role.title,
+                                value: role.id 
+                            }))
+                        },
+                        {
+                            type: "list",
+                            name: "managerId",
+                            message: "Name of manager:",
+                            choices: employees.map(employees => ({
+                                name: `${employees.first_name} ${employees.last_name}`,
+                                value: employees.id
+                            }))
+                        }
+                    ]).then(ans => {
+                        db.query(`INSERT INTO employees (first_name, last_name, role_id, manager_id)
+                            VALUES (?, ?, ?, ?)`, [ans.firstName, ans.lastName, ans.roleId, ans.managerId], (err, results) => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                db.query(`SELECT * FROM employees`, (err, results) => {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {
+                                        console.table(results);
+                                        init();
+                                    }
+                                });
+                            }
+                        });
+                    });
+            });
+        });
+    };
+    
 
 const updateEmployee = () => {
     db.query('SELECT * FROM employees', (err, employees) => {
