@@ -1,3 +1,4 @@
+-- Seeds database with information in tables
 USE employees_db;
 
 INSERT INTO department(department_name)

@@ -1,3 +1,4 @@
+// Dependencies
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 const mysql = require('mysql2');
@@ -16,6 +17,7 @@ const db = mysql.createConnection(
     console.log(`Connected to the employee_db database.`)
 );
 
+// Initializes app
 const init = () => {
     inquirer
         .prompt([
@@ -60,14 +62,16 @@ const init = () => {
 
 init();
 
+// Function to view departments
 const viewDept = () => {
-    // console.log("Working")
+    
     db.query(`SELECT * FROM department`, (err, results) => {
         err ? console.error(err) : console.table(results);
         init();
     })
 };
 
+// Function to veiw roles
 const viewRole = () => {
     db.query(`SELECT role.id, role.title, role.salary, CONCAT(department_name) AS department
     FROM role
@@ -77,6 +81,7 @@ const viewRole = () => {
     })
 };
 
+// Function to view employees
 const viewEmployees = () => {
     db.query(`SELECT employees.id, employees.first_name, employees.last_name, role.title, department.department_name AS department, role.salary,  CONCAT(manager.first_name, " ", manager.last_name) AS manager FROM employees LEFT JOIN role ON employees.role_id = role.id LEFT JOIN  department on role.department_id = department.id LEFT JOIN employees manager ON manager.id = employees.manager_id`, (err, results) => {
         if (manager = null) {
@@ -87,6 +92,7 @@ const viewEmployees = () => {
     })
 }
 
+// To add a department to database
 const addDept = () => {
     inquirer
         .prompt([
@@ -111,6 +117,7 @@ const addDept = () => {
         })
 };
 
+// To add a role to database
 const addRole = () => {
     db.query('SELECT * FROM department', (err, department) => {
         if (err) { console.log(err) }
@@ -148,6 +155,7 @@ const addRole = () => {
         })
     }
 
+    // Function to add a new employee
     const addEmployee = () => {
         db.query('SELECT * FROM role', (err, role) => {
             if (err) { 
@@ -212,7 +220,7 @@ const addRole = () => {
         });
     };
     
-
+// Update employee information
 const updateEmployee = () => {
     db.query('SELECT * FROM employees', (err, employees) => {
         if (err) {
