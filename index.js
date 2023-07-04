@@ -197,7 +197,7 @@ const addRole = () => {
                             if (err) {
                                 console.log(err);
                             } else {
-                                db.query(`SELECT * FROM employees`, (err, results) => {
+                                db.query(`SELECT employees.id, employees.first_name, employees.last_name, role.title, CONCAT(manager.first_name, " ", manager.last_name) AS manager FROM employees LEFT JOIN role ON employees.role_id = role.id LEFT JOIN employees manager ON manager.id = employees.manager_id`, (err, results) => {
                                     if (err) {
                                         console.log(err);
                                     } else {
@@ -228,7 +228,7 @@ const updateEmployee = () => {
             inquirer.prompt([
                 {
                     type: "list",
-                    name: "select employee",
+                    name: "selectEmployee",
                     message: "Select the employee whose role will be updated:",
                     choices: employees.map(employees => ({
                         name: `${employees.first_name} ${employees.last_name}`,
@@ -245,7 +245,7 @@ const updateEmployee = () => {
                     }))
                 }
             ]).then((answers) => {
-                db.query('UPDATE employees SET ? WHERE ?', [{ role_id: answers.updatedRole }, { id: answers.selectEmp }], (err, res) => {
+                db.query('UPDATE employees SET ? WHERE ?', [{ role_id: answers.updatedRole }, { id: answers.selectEmployee }], (err, res) => {
                     if (err) {
                         console.log(err);
                     } else {
@@ -259,23 +259,4 @@ const updateEmployee = () => {
     });
 };
 
-    // inquirer
-    //     .prompt([
-
-    //         {
-    //             type: "list",
-    //             name: "employee",
-    //             message: "Which employee would you like to update?",
-    //             choices: ["Jean Smith", "Jeremy Piven", "Maria Gayle", "Elen Phillips",
-    //                     "Henry Cole", "Raymond Stewart", "Kevin Skinner", "Romeo Singer", 
-    //                     "Bret Morgan", "Angel Cruz", "Shawn King"]   
-    //         },
-    //         {
-    //             type: 'list',
-    //             name: 'newRole',
-    //             message: 'What is their new role?',
-    //             choices: ['Accountant', 'Senior Developer', 'Junior Developer', 'Lawyer', 
-    //             'Sales Lead', 'Sales Person', 'Legal Team Lead', 'Head of Finance']
-    //         },
-    //     ])
-// }
+    
