@@ -44,6 +44,11 @@ nmp jest
 * <a href="https://developer.mozilla.org/en-US/">MND webdocs</a>
 * <a href="https://stackoverflow.com">Stackoverflow</a>
 
+## Questions
+
+* GitGub: (https://github.com/GregNasir)
+* Email: gregoryo.rwilliams@gmail.com
+
 ## License
 Copyright (c) 2023 Gregory Williams
 
