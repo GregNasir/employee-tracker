@@ -1,1 +1,55 @@
-# employee-tracker
+# Employee-tracker
+by Gregory Williams <br>
+
+## Table of Contents
+* [Description](#description)
+* [Repository and demo](#repository-and-demo)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Tests](#tests)
+* [Credits](#credits)
+* [Questions](#questions)
+* [License](#license)
+
+# Description
+
+The employee tracker application uses the command line to add and update information in a company's database. the inquirer module in nodejs was used to formulate questons. Other tools used were:
+
+* Javascript 
+* Node.js
+* Run tests using nmp juest
+* Timely commits to GitHub repository to save work
+* Mysql to store data
+
+Working on the employee tracker has really given me in-depth knowledge, on the ins and out of mysql. From command line syntax to files association with databases.
+
+## Repository and Demo
+* <a href="https://github.com/GregNasir/employee-tracker">Employee tracker Repository</a>
+
+## Installation
+
+Copy source code from the GitHub repository, download and install nodejs, npm and its extension inquirer8.2.4.
+
+## Usage
+
+The employee tracker was designed to allow employers to maintan a database of its employees, along with relevant information.
+
+## Tests
+
+nmp jest
+## Credits
+
+* Columbia Engineering Bootcamp resources
+* <a href="https://www.w3schools.com/">w3schools website</a>
+* <a href="https://developer.mozilla.org/en-US/">MND webdocs</a>
+* <a href="https://stackoverflow.com">Stackoverflow</a>
+
+## License
+Copyright (c) 2023 Gregory Williams
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:

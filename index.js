@@ -53,8 +53,8 @@ const init = () => {
                     break;
                 case "Update an employee role": updateEmployee();
                     break;
-                case "I'm finished":
-                    console.log("Thank you very much!");
+                case "No more options":
+                    console.log("Thank you!");
                     process.exit();
             }
         }).catch(err => console.error(err));
