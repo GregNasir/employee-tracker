@@ -25,7 +25,7 @@ Working on the employee tracker has really given me in-depth knowledge, on the i
 
 ## Repository and Demo
 * <a href="https://github.com/GregNasir/employee-tracker">Employee tracker Repository</a>
-* [![video](https://github.com/GregNasir/employee-tracker/assets/63434657/01a9cf7f-5627-4fb6-808d-2a40955e9333)
+https://github.com/GregNasir/employee-tracker/assets/63434657/01a9cf7f-5627-4fb6-808d-2a40955e9333
 * <img width="1386" alt="Employee-tracker-screenshot" src="https://github.com/GregNasir/employee-tracker/assets/63434657/68e44b1a-6414-4980-8d56-f04db10750a1">
 
 ## Installation
