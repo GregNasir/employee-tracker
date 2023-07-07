@@ -143,13 +143,22 @@ const addRole = () => {
             }
         ]).then(function (answers) {
             db.query('INSERT INTO role SET ?', {
-            title: answers.title,
-            salary: answers.salary,
-            department_id: answers.departmentId
-            }, function (err, res) {
-            if (err) throw err;
-            console.table(res)
-            init();
+                title: answers.title,
+                salary: answers.salary,
+                department_id: answers.departmentId
+                }, 
+                function (err, res) {
+                if (err) throw err;
+                console.table(res)
+
+                db.query(`SELECT role.id, role.title, role.salary, CONCAT(department_name) AS department
+                FROM role
+                LEFT JOIN  department on role.department_id = department.id;`, (err, results) => {
+                    err ? console.error(err) : console.table(results);
+                    init();
+                })
+
+                init();
             })
         })
         })
