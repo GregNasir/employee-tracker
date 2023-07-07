@@ -25,11 +25,10 @@ Working on the employee tracker has really given me in-depth knowledge, on the i
 
 ## Repository and Demo
 * <a href="https://github.com/GregNasir/employee-tracker">Employee tracker Repository</a>
-* 
+  
+https://github.com/GregNasir/employee-tracker/assets/63434657/477866c3-4380-4d4f-b869-2dbd97af3c53
 
-https://github.com/GregNasir/employee-tracker/assets/63434657/1c79076b-1943-4a15-9887-11ccbca4d195
 
-https://youtu.be/aTmC5x1mcvU
 
 
 
